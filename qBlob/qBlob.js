@@ -1,5 +1,5 @@
 // JavaScript
-define(["./vendor/html2canvas.js", "./vendor/Blob.js", "./vendor/canvas-toBlob.js", "./vendor/FileSaver.js"], function() {
+define(["./vendor/html2canvas.js", "./vendor/Blob.js", "./vendor/canvas-toBlob.js", "./vendor/FileSaver.js"], function(html2canvas,Blob,canvasToBlob,FileSaver) {
   
   var qBlob = {};
   qBlob.saveToFile = function(obj, filename) {
