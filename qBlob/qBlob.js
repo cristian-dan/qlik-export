@@ -3,13 +3,17 @@ define(["./vendor/html2canvas.js", "./vendor/Blob.js", "./vendor/canvas-toBlob.j
   
   var qBlob = {};
   qBlob.saveToFile = function(obj, filename) {
-	html2canvas(document.getElementById(obj), {
+	/*html2canvas(document.getElementById(obj), {
 	  onrendered: function(canvas) {
 		canvas.toBlob(function(blob) {
 		  saveAs(blob, filename);
 		});
 	  }
-	});
+	});*/
+    domtoimage.toBlob(document.getElementById(obj))
+                    .then(function(blob) {
+                        window.saveAs(blob, 'my-node.png');
+                    });
   };
   
   return qBlob;
