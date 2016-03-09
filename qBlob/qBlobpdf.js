@@ -5,14 +5,22 @@ define(["./vendor/html2canvas.js", "./vendor/Blob.js", "./vendor/canvas-toBlob.j
   qBlobPDF.saveToFile = function(obj, filename) {
 	html2canvas(document.getElementById(obj), {
 	  onrendered: function(canvas) {
-		var ctx=canvas.getContext("2d");
-        ctx.webkitImageSmoothingEnabled = false;
-        ctx.mozImageSmoothingEnabled = false;
-        ctx.imageSmoothingEnabled = false;
-        var imgData = canvas.toDataURL("image/jpg");  
-        var doc = new jsPDF('p', 'mm');
-                doc.addImage(imgData, 'PNG', 10, 10);
-                doc.save(filename);  
+        var ctx=canvas.getContext("2d");
+        ctx.webkitImageSmoothingEnabled = true;
+        ctx.mozImageSmoothingEnabled = true;
+        ctx.imageSmoothingEnabled = true;
+		canvas.toBlob(function(blob){
+                var urlCreator = window.URL || window.webkitURL;
+                var imageUrl = urlCreator.createObjectURL(blob);
+                var img = new Image();
+                
+                img.src = imageUrl;
+                img.onload = function(){
+                    var pdf = new jsPDF('p','px',[img.height, img.width]);
+                    pdf.addImage(img, 0, 0, img.width, img.height);
+                    pdf.save('myPdf.pdf');
+                };
+            })
 	  }
 	});
   };
