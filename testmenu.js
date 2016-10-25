@@ -179,6 +179,10 @@ require(["js/qlik", "./qBlob/qBlob.js", './qBlob/qBlobpdf.js'], function(qlik, q
     qObjects.push({
         divId: 'QV11',
         qId: 'akDGX'
+    }) 
+    qObjects.push({
+        divId: 'QV12',
+        qId: 'ReUkDB'
     })
 
 
